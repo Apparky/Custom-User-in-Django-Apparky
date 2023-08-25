@@ -6,11 +6,11 @@ from .models import *
 
 
 # Register your models here.
-
+'''
 admin.site.register(StudentProfile)
 admin.site.register(TeacherProfile)
 
-
+'''
 class TuitionUserAdmin(UserAdmin):
     """Define admin model for custom User model with no username field."""
     # fieldsets = (
