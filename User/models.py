@@ -21,21 +21,20 @@ class User(AbstractUser):
             return super().save(*args, **kwargs)
 
 
-class StudentManager(BaseUserManager):
+# Student Section --------------
+
+class StudentManager(BaseUserManager):  # Section to manage User when the Role is Student
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(role=User.Role.STUDENT)
+        return results.filter(role=User.Role.STUDENT)   # Here we have to define the User Role
 
 
 class Student(User):
     base_role = User.Role.STUDENT
-    student = StudentManager()
+    student = StudentManager()  # Here we declare The User is a Student
 
     class Meta:
         proxy = True
-
-    def welcome(self):
-        return "Only for Students"
 
 
 @receiver(post_save, sender=Student)
@@ -65,8 +64,11 @@ class Teacher(User):
     class Meta:
         proxy = True
 
-    def welcome(self):
-        return "Only for Teachers"
+
+@receiver(post_save, sender=Teacher)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created and instance.role == 'TEACHER':
+        TeacherProfile.objects.create(user=instance)
 
 
 class TeacherProfile(models.Model):
@@ -75,13 +77,4 @@ class TeacherProfile(models.Model):
 
     def __str__(self):
         return self.user
-
-
-@receiver(post_save, sender=Teacher)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created and instance.role == 'TEACHER':
-        TeacherProfile.objects.create(user=instance)
-
-
-
 

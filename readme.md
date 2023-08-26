@@ -236,7 +236,29 @@ admin.site.register(get_user_model(), TuitionUserAdmin)
 ```
 >
 > That's all you have to do to display Custom User Table to the Admin Section
+> 
+> Now we have to Define and Declare a User where the role is `STUDENT`
+> 
+> Now copy & paste the following commend
+```commandline
+# Student Section --------------
 
+class StudentManager(BaseUserManager):  # Section to manage User when the Role is Student
+    def get_queryset(self, *args, **kwargs):
+        results = super().get_queryset(*args, **kwargs)
+        return results.filter(role=User.Role.STUDENT)   # Here we have to define the User Role 
+
+
+class Student(User):
+    base_role = User.Role.STUDENT
+    student = StudentManager()  # Here we declare The User is a Student
+
+    class Meta:
+        proxy = True
+
+```
+>
+> 
 
 
 
