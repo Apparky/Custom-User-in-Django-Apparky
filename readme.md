@@ -350,6 +350,13 @@ python manage.py migrate
 > 
 > ![StudentData](Screen%20Shots/ss14.PNG)
 > 
+> Before updating it to Admin Page copy & paste the following code to the `User/admin.py` file
+```commandline
+from .models import *
+
+admin.site.register(StudentProfile)
+```
+> 
 > This is how it looks like from Admin Section
 > 
 > ![DjangoAdmin](Screen%20Shots/ss15.PNG)

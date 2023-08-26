@@ -1,9 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-
 from .models import *
-
 
 # Register your models here.
 admin.site.register(StudentProfile)
@@ -11,6 +9,8 @@ admin.site.register(StudentProfile)
 admin.site.register(TeacherProfile)
 
 '''
+
+
 class TuitionUserAdmin(UserAdmin):
     """Define admin model for custom User model with no username field."""
     # fieldsets = (
@@ -32,4 +32,3 @@ class TuitionUserAdmin(UserAdmin):
 
 
 admin.site.register(get_user_model(), TuitionUserAdmin)
-
