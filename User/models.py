@@ -37,18 +37,18 @@ class Student(User):
         proxy = True
 
 
-@receiver(post_save, sender=Student)
+@receiver(post_save, sender=Student)                                # Method to add Student in to the student Table
 def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.role == 'STUDENT':
-        StudentProfile.objects.create(user=instance)
+        StudentProfile.objects.create(user=instance)                # By this Student Data will Store in to Student Table
 
 
-class StudentProfile(models.Model):
+class StudentProfile(models.Model):     # Table for Student
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     student_id = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user                # By This the name of the Student will Reflect to the Admin page
 
 
 class TeacherManager(BaseUserManager):
