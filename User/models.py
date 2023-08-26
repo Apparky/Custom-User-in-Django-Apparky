@@ -40,7 +40,7 @@ class Student(User):
 @receiver(post_save, sender=Student)                                # Method to add Student in to the student Table
 def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.role == 'STUDENT':
-        StudentProfile.objects.create(user=instance)                # By this Student Data will Store in to Student Table
+        StudentProfile.objects.create(user=instance)              # By this Student Data will Store in to Student Table
 
 
 class StudentProfile(models.Model):     # Table for Student
@@ -51,30 +51,33 @@ class StudentProfile(models.Model):     # Table for Student
         return self.user                # By This the name of the Student will Reflect to the Admin page
 
 
-class TeacherManager(BaseUserManager):
+"""     # Teacher Section -------------------------------------      """
+
+
+class TeacherManager(BaseUserManager):      # Section to manage User when the role is Teacher
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(role=User.Role.TEACHER)
+        return results.filter(role=User.Role.TEACHER)       # Here we have to define the User Role as Teacher
 
 
 class Teacher(User):
     base_role = User.Role.TEACHER
-    teacher = TeacherManager()
+    teacher = TeacherManager()      # Here we declare The User is a Teacher
 
     class Meta:
         proxy = True
 
 
-@receiver(post_save, sender=Teacher)
+@receiver(post_save, sender=Teacher)                      # Method to add Teacher in to the Teacher Table
 def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.role == 'TEACHER':
-        TeacherProfile.objects.create(user=instance)
+        TeacherProfile.objects.create(user=instance)        # By this Teacher Data will Store in to Teacher Table
 
 
-class TeacherProfile(models.Model):
+class TeacherProfile(models.Model):     # Table for Teacher
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     teacher_id = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user        # By This the name of the Teacher will Reflect to the Admin page
 
