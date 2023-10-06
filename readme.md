@@ -8,9 +8,9 @@ Following guide are given billow for this project
 
 
 
-> # Step-by-Step Guide
->
-> ## Step 1:-
+> ## Step-by-Step Guide
+
+> ### Step 1:-
 > Opem Terminal in your system and type the given commend
 > 
 ```commandline
@@ -37,7 +37,8 @@ python manage.py startapp User ## Your App name can be diferent
 > 
 > We are done with Step 1
 > 
-> ## Step 2:
+
+> ### Step 2:-
 >
 > We have created the Project file, and it's App file, Now Connect the App with Project
 > 
@@ -73,7 +74,8 @@ INSTALLED_APPS = [
 > 
 > On Next Step we will modify the Default User Model to custom User Model
 > 
-> ## Step 3:
+
+> ### Step 3:-
 > 
 > Here We will change the User Model 
 > 
@@ -198,7 +200,8 @@ Superuser created successfully.
 > 
 > Enough for Step 3, Moving on to Step 4
 > 
-> ## Step 4:
+
+> ### Step 4:-
 > We have created a User and SuperUser on Previous Step, But we miss the way to register our Custom User table to the Admin Page.
 > 
 > Go to `User/admin.py` and copy and paste the following Command
@@ -363,7 +366,8 @@ admin.site.register(StudentProfile)
 > 
 > That's all for Step 4. Let's move on to Step 5
 > 
-> ## Step 5:
+
+> ### Step 5:-
 > 
 > Let's do the same for `Teacher` profile.
 > 
